@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b12">
+<title>MacroPulse LIVE</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#060a10;color:#eef3f8;font:15px -apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif}
+main{max-width:1050px;margin:auto;padding:15px 13px 35px}.top,.hero,.card{background:#0d141e;border:1px solid #202b3a;border-radius:19px;padding:18px;margin-bottom:12px}
+.top{display:flex;justify-content:space-between;align-items:center}.logo{font-size:25px;font-weight:850}.small{color:#8795a8;font-size:12px;margin-top:3px}
+button{background:#151f2f;border:1px solid #35445c;color:#fff;border-radius:10px;padding:10px 13px;font-weight:700}
+.hero{background:linear-gradient(145deg,#132033,#0b1018);padding:22px}.eyebrow{font-size:10px;letter-spacing:2px;color:#8290a3}.event{font-size:35px;font-weight:850;margin:8px 0 3px}.count{font:800 29px ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:18px}
+.grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px}.grid .card{margin:0}.tabs{display:flex;gap:7px;overflow:auto;padding:2px 0 13px}.active{border-color:#6ea8ff;background:#16263d}
+.signal{font-size:39px;font-weight:900;margin:15px 0}.buy{color:#55e39a}.sell{color:#ff6f7b}.wait{color:#ffd166}
+.row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:8px;padding:12px 0;border-bottom:1px solid #1b2531}.head{color:#8290a3;font-size:10px;text-transform:uppercase}
+.big{font-size:28px;font-weight:850;margin:18px 0}.meter{height:8px;background:#1a2431;border-radius:9px}.meter i{display:block;height:100%;border-radius:9px;background:#55e39a}.muted{color:#8795a8;line-height:1.5}.badge{border:1px solid #35445c;border-radius:18px;padding:4px 7px;font-size:10px;width:max-content}.live{color:#55e39a}
+footer{text-align:center;color:#5f6c7f;font-size:11px;padding-top:12px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.event{font-size:31px}.row{grid-template-columns:1.3fr .9fr}.row span:nth-child(3),.row span:nth-child(4){display:none}}
+</style>
+</head>
+<body><main>
+<div class="top"><div><div class="logo">MacroPulse</div><div class="small">CPI • NFP • FOMC • XAUUSD intelligence</div></div><button onclick="refresh()">↻ Refresh</button></div>
+
+<section class="hero">
+<div class="eyebrow">NEXT HIGH-IMPACT RELEASE</div>
+<div class="event" id="event">CPI</div>
+<div class="small" id="when">August 12, 2026 • 14:30 South Africa</div>
+<div class="count" id="count">--:--:--</div>
+<div class="small"><span class="live">● LIVE CLOCK</span> • Data snapshot updated 11 Aug 2026</div>
+</section>
+
+<div class="tabs">
+<button class="active" onclick="setPair('XAUUSD',this)">XAUUSD</button>
+<button onclick="setPair('EURUSD',this)">EURUSD</button>
+<button onclick="setPair('GBPUSD',this)">GBPUSD</button>
+<button onclick="setPair('USDJPY',this)">USDJPY</button>
+</div>
+
+<section class="grid">
+<div class="card"><h3>Pre-news prediction</h3><div id="signal" class="signal buy">BUY</div>
+<div class="row"><span>Confidence</span><b id="confidence">64%</b><span></span><span></span></div>
+<div class="meter"><i id="meter" style="width:64%"></i></div>
+<p id="reason" class="muted">Base case: softer inflation expectations + weak July payrolls favor a softer USD and provide a bullish setup for gold. Energy/inflation risk keeps the signal below high confidence.</p></div>
+
+<div class="card"><h3>Expected volatility</h3><div class="big">EXTREME</div><p class="muted">CPI is a high-impact release. Avoid treating the first spike as confirmation.</p></div>
+
+<div class="card"><h3>Model state</h3><div class="big" id="state">READY</div><p class="muted">Scenario model • not a guaranteed signal.</p></div>
+</section>
+
+<section class="card"><h2>Tomorrow's CPI setup</h2>
+<div class="row head"><span>Metric</span><span>Previous</span><span>Consensus</span><span>Model</span></div>
+<div class="row"><span><b>CPI YoY</b></span><span>3.5%</span><span>3.4%</span><span>Cooling</span></div>
+<div class="row"><span><b>Core CPI YoY</b></span><span>2.6%</span><span>2.5%</span><span>Cooling</span></div>
+<div class="row"><span><b>CPI MoM</b></span><span>-0.4%</span><span>~0.2%</span><span>Rebound</span></div>
+<div class="row"><span><b>Core CPI MoM</b></span><span>0.0%</span><span>~0.2%</span><span>Rebound</span></div>
+<p class="muted">Consensus values are a current market snapshot, not an official BLS forecast. BLS is the source of the eventual actual release.</p>
+</section>
+
+<section class="card"><h2>Latest employment</h2>
+<div class="row head"><span>Metric</span><span>Latest</span><span>Previous</span><span>Bias</span></div>
+<div class="row"><span><b>July NFP</b></span><span>-23K</span><span>+57K</span><span>USD ↓</span></div>
+<div class="row"><span><b>Unemployment</b></span><span>4.1%</span><span>4.2%</span><span>USD ↓</span></div>
+<p class="muted">The July Employment Situation was released Aug. 7 at 8:30 a.m. ET. The next scheduled NFP is Sept. 4.</p>
+</section>
+
+<section class="card"><h2>FOMC</h2>
+<div class="row head"><span>Event</span><span>Date</span><span>Time</span><span>Impact</span></div>
+<div class="row"><span><b>FOMC Minutes</b></span><span>Aug 19</span><span>2:00 PM ET</span><span>HIGH</span></div>
+<div class="row"><span><b>FOMC meeting</b></span><span>Sep 15–16</span><span>2:00 PM ET</span><span>EXTREME</span></div>
+<p class="muted">The Fed held rates at 3.50%–3.75% at the July 29 meeting. Three members dissented in favor of a 25 bp hike.</p></section>
+
+<section class="card"><h3>Scenario engine</h3>
+<div class="row"><span><b>Hot CPI</b></span><span>USD ↑</span><span>XAU ↓</span><span>SELL risk</span></div>
+<div class="row"><span><b>In line</b></span><span>Mixed</span><span>Whipsaw</span><span>WAIT</span></div>
+<div class="row"><span><b>Cool CPI</b></span><span>USD ↓</span><span>XAU ↑</span><span>BUY risk</span></div>
+</section>
+
+<footer>MacroPulse is an analytical tool, not financial advice. Probabilities are model estimates and can be wrong.</footer>
+</main>
+<script>
+let pair="XAUUSD";
+const target=new Date("2026-08-12T14:30:00+02:00");
+function clock(){let s=Math.max(0,Math.floor((target-new Date())/1000));let h=Math.floor(s/3600),m=Math.floor(s%3600/60),q=s%60;document.getElementById("count").textContent=[h,m,q].map(x=>String(x).padStart(2,"0")).join(":")}
+function setPair(p,b){pair=p;document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");let el=document.getElementById("signal"),r=document.getElementById("reason");let buy=p==="XAUUSD"||p==="EURUSD"||p==="GBPUSD";if(p==="USDJPY")buy=false;el.textContent=buy?"BUY":"SELL";el.className="signal "+(buy?"buy":"sell");document.getElementById("confidence").textContent="64%";document.getElementById("meter").style.width="64%";r.textContent=buy?"For "+p+", the current macro setup leans toward a softer USD.":"For "+p+", the current macro setup leans toward USD strength relative to this pair. The CPI release can invalidate the bias."}
+function refresh(){document.getElementById("state").textContent="UPDATED";setTimeout(()=>document.getElementById("state").textContent="READY",1200)}
+clock();setInterval(clock,1000);
+</script></body></html>
